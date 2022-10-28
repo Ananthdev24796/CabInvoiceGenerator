@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class InvoiceGeneratorTest {
     InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
-
+    InvoiceGeneratorForPremimumRides invoiceGeneratorForPremimumRides = new InvoiceGeneratorForPremimumRides();
     @Test
     public void givenDistanceAndTime_ShouldReturnFare() {
         double distance = 3.0;
@@ -55,5 +55,20 @@ public class InvoiceGeneratorTest {
             }
             break;
         }
+    }
+    @Test
+    public void givenDistanceAndTime_ShouldReturnFare_ForPremiumRide(){
+        double distance = 3.0;
+        int time = 5;
+        double fare = invoiceGeneratorForPremimumRides.calculateFare(distance,time);
+        Assert.assertEquals(55,fare,0.0);
+    }
+
+    @Test
+    public void givenMinimumDistanceAndTime_ShouldReturnMinimumFare_ForPremiumRide(){
+        double distance = 0.2;
+        int time = 1;
+        double fare = invoiceGeneratorForPremimumRides.calculateFare(distance,time);
+        Assert.assertEquals(20,fare,0.0);
     }
 }
